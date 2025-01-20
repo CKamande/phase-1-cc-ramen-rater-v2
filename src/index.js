@@ -1,4 +1,5 @@
 // index.js
+
 // Mock data for ramen images and details
 const ramenData = [
   { name: 'Ramen Nirvana', restaurant: 'Nirvana', image: './assets/ramen/nirvana.jpg', rating: 10, comment: 'Best ramen ever!' },
@@ -17,6 +18,12 @@ const handleClick = (ramen, event) => {
 // This will populate the ramen menu with images
 const displayRamens = () => {
   const ramenMenu = document.querySelector('#ramen-menu');
+
+  if (!ramenMenu) {
+    console.error("Ramen menu element is missing in the DOM!");
+    return; // If the element doesn't exist, return early and don't try to manipulate it
+  }
+
   ramenMenu.innerHTML = ''; // Clear any previous ramen images
   ramenData.forEach(ramen => {
     const img = document.createElement('img');
@@ -55,7 +62,9 @@ const main = () => {
   addSubmitListener(); // Add event listener for form submission
 };
 
-main();
+document.addEventListener('DOMContentLoaded', () => {
+  main(); // Ensure the DOM is fully loaded before calling `main`
+});
 
 // Export functions for testing
 export { displayRamens, addSubmitListener, handleClick, main };
